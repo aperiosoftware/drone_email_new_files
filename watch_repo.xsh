@@ -12,22 +12,22 @@ from datetime import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-#server = smtplib.SMTP($SMTP_SERVER_ADDRESS,${...}.get("SMTP_SERVER_PORT", 587))
-#server.starttls()
-#server.login($SMTP_SERVER_USERNAME, $SMTP_SERVER_PASSWORD'])
+server = smtplib.SMTP($PLUGIN_SMTP_SERVER_ADDRESS,${...}.get("PLUGIN_SMTP_SERVER_PORT", 587))
+server.starttls()
+server.login($PLUGIN_SMTP_SERVER_USERNAME, $PLUGIN_SMTP_SERVER_PASSWORD'])
 
 msg = MIMEMultipart()
-msg['From'] = $EMAIL_FROM_ADDRESS
-msg['To'] = $EMAIL_TO_ADDRESS
+msg['From'] = $PLUGIN_EMAIL_FROM_ADDRESS
+msg['To'] = $PLUGIN_EMAIL_TO_ADDRESS
 msg['Date'] = datetime.now().isoformat()
-msg['Subject'] = $EMAIL_SUBJECT
+msg['Subject'] = $PLUGIN_EMAIL_SUBJECT
 
-BASE_URL = $GIT_FILE_HTTP_BASE_URL
-MESSAGE_TEMPLATE = $EMAIL_MESSAGE_TEMPLATE
+BASE_URL = $PLUGIN_GIT_FILE_HTTP_BASE_URL
+MESSAGE_TEMPLATE = $PLUGIN_EMAIL_MESSAGE_TEMPLATE
 
-last_commit = $(git rev-parse $GIT_MAIN_REF).strip()
+last_commit = $(git rev-parse $PLUGIN_GIT_MAIN_REF).strip()
 
-previous_commit = $(git rev-parse $GIT_LAST_EMAIL_REF).strip()
+previous_commit = $(git rev-parse $PLUGIN_GIT_LAST_EMAIL_REF).strip()
 
 if last_commit == previous_commit:
     print(f'No changes since last check - latest commit is {last_commit}')
@@ -47,7 +47,8 @@ message = MESSAGE_TEMPLATE.format(urls=urls)
 
 msg.attach(MIMEText(message, 'plain'))
 
+print("Sending the following email:")
 print(msg)
-#server.send_message(msg)
-#
-#server.quit()
+server.send_message(msg)
+
+server.quit()
