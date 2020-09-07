@@ -9,7 +9,7 @@ This script uses the following environment variables, when setting them from
 the `.drone.yml` file remove the `PLUGIN_` and make them lower case, an example
 config is:
 
-
+```
   - name: notify
     image: cadair/drone_email_new_files
     settings:
@@ -27,6 +27,7 @@ config is:
       git_main_ref: "HEAD"
       git_last_email_ref: "last-notified"
       git_file_http_base_url: "https://github.com/example/example/blob/master/"
+```
 
 * `PLUGIN_SMTP_SERVER_ADDRESS`
 
