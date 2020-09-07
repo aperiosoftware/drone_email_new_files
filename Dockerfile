@@ -1,7 +1,8 @@
 FROM xonsh/xonsh:alpine
 
-ADD watch_repo.xsh /bin/
+RUN apk add git
 
-RUN chmod +x /bin/watch_repo.xsh
+ADD watch_repo.xsh /opt/
+WORKDIR /root
 
-ENTRYPOINT /bin/watch_repo.xsh
+ENTRYPOINT ["/usr/bin/xonsh", "/opt/watch_repo.xsh"]
