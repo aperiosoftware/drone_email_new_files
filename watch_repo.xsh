@@ -40,6 +40,9 @@ message = MESSAGE_TEMPLATE.format(urls=urls)
 msg = MIMEMultipart()
 msg['From'] = $PLUGIN_EMAIL_FROM_ADDRESS
 msg['To'] = $PLUGIN_EMAIL_TO_ADDRESS
+cc_address = ${...}.get("PLUGIN_EMAIL_CC_ADDRESS", None)
+if cc_address:
+  msg['Cc'] = cc_address
 msg['Date'] = datetime.now().isoformat()
 msg['Subject'] = $PLUGIN_EMAIL_SUBJECT
 msg.attach(MIMEText(message, 'plain'))

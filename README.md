@@ -53,6 +53,10 @@ config is:
 
    The email address to send the notification email to.
 
+* `PLUGIN_EMAIL_CC_ADDRESS` (optional)
+
+   A second email address to send a carbon copy of the notification email to.
+
 * `PLUGIN_EMAIL_SUBJECT`
 
    The subject for the sent email.
